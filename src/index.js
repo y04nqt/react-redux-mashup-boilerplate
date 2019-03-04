@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import Theme from './theme'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import Layout from './Layout';
+import Root from "./store";
+// import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+    <Root>
+        <MuiThemeProvider theme={Theme}>
+            <CssBaseline>
+                <Layout />
+            </CssBaseline>
+        </MuiThemeProvider>
+    </Root>, document.getElementById('root'));
