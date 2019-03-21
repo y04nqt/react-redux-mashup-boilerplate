@@ -6,6 +6,13 @@ import Button from '@material-ui/core/Button';
 import SampleView from '../views/SampleView.jsx'
 
 class SampleContainer extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            app: window.qlikApp,
+            vis: ''
+        }
+    }
 
     handleTurnOn = () => {
         this.props.turnOn()
@@ -15,8 +22,18 @@ class SampleContainer extends React.Component {
         this.props.turnOff()
     }
 
+    componentWillMount() {
+        this.state.app.visualization.get('MJaMwK').then((vis) => {
+            vis.show('fillThis')
+            this.setState({vis: vis})
+        })
+    }
+
+    componentWillUnmount() {
+        this.state.vis.close()
+    }
+
     render() {
-        console.log(this.props, 'checking inside container')
         return (
             <div id="sample-container">
                 <center>
